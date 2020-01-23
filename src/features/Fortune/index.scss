@@ -3,6 +3,7 @@
 .fortune-container {
   height: 45%;
   width: 90%;
+  max-width: 1000px;
   @include make_flex(column, space-between, center);
 
   & > button {
