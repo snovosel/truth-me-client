@@ -1,0 +1,68 @@
+.fortune-container-input {
+  top: 50%;
+  margin-top: 55px;
+  border-radius: 5px;
+  cursor: default;
+  resize: none;
+  height: 200px;
+  width: 500px;
+
+  padding: 50px;
+
+  line-height: 200%;
+
+  // font-family: "Righteous", cursive;
+  font-family: "Amatic SC", cursive;
+
+  position: absolute;
+
+  // font-size: 20px;
+  font-size: 32px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  background-color: #b3b3b3;
+  border: none;
+
+  transition: padding 0.2s linear, background-color 0.2s linear;
+
+  &:focus {
+    outline: none;
+
+    transition: padding 0.2s linear, background-color 0.2s linear;
+
+    background-color: rgba(190, 167, 171, 0.5);
+    padding: 20px;
+  }
+}
+
+input {
+  width: 60%;
+  border: none;
+  font-size: 36px;
+  letter-spacing: 2px;
+  border-radius: 3px;
+  font-family: "Amatic SC", cursive;
+  box-sizing: border-box;
+  padding: 10px;
+
+  &::placeholder {
+    text-align: center;
+  }
+}
+
+.input {
+  height: 100px;
+
+  transition: height 0.2s linear, background-color 0.2s linear;
+}
+
+.focused {
+  outline: none;
+
+  height: 55px;
+
+  background-color: rgba(190, 167, 171, 0.5);
+  transition: height 0.2s linear, background-color 0.2s linear;
+
+  color: white;
+}
