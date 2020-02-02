@@ -1,10 +1,15 @@
 @import "../../mixins.scss";
 
+.fortune {
+  color: white;
+  font-size: 19px;
+}
+
 .fortune-container {
-  height: 45%;
+  height: 30%;
   width: 90%;
   max-width: 1000px;
-  @include make_flex(column, space-between, center);
+  @include make_flex(column, space-evenly, center);
 
   & > button {
     width: 550px;
@@ -18,13 +23,47 @@
   p {
     font-size: 60px;
     margin: 0;
-    // font-size: 30px;
-    // margin-bottom: 25px;
     letter-spacing: 3px;
     color: #e6e6e6;
 
     font-family: "Amatic SC", cursive;
     font-weight: bold;
+  }
+}
+
+@mixin question_container() {
+  height: 90px;
+  width: 400px;
+
+  box-sizing: border-box;
+
+  @include make_flex(column, center, center);
+
+  p {
+    color: white;
+    font-size: 35px;
+
+    transition: color 1s linear;
+  }
+
+  transition: background-color 0.2s linear, border 1s linear;
+}
+
+.question-container {
+  &-regular {
+    border: 7px solid #cccccc;
+    @include question_container();
+  }
+
+  &-posed {
+    border: 7px solid #f5c503;
+
+    @include question_container();
+
+    p {
+      color: #f5c503;
+      transition: color 1s linear;
+    }
   }
 }
 

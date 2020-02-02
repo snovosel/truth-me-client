@@ -17,6 +17,18 @@ class FortuneInput extends Component {
     this.determineClassName = this.determineClassName.bind(this);
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (
+      nextProps.focused !== this.props.focused ||
+      nextState.value !== this.state.value ||
+      nextState.count !== this.state.count
+    ) {
+      return true;
+    }
+
+    return false;
+  }
+
   componentDidMount() {
     document.addEventListener("mousedown", this.handleClickOutside);
   }
@@ -53,6 +65,12 @@ class FortuneInput extends Component {
       },
       () => {
         this.props.setEyes(this.state.value.length);
+
+        if (this.state.value.split("").some(char => char === "?")) {
+          // this.props.setQuestionPosed(true);
+        } else {
+          this.props.setQuestionPosed(false);
+        }
       }
     );
   }
@@ -69,7 +87,7 @@ class FortuneInput extends Component {
         value={this.state.value}
         maxLength={MAX_CHARACTERS}
         onChange={this.handleChange}
-        placeholder="Ask away..."
+        placeholder="...Ask away"
       />
     );
   }

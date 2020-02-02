@@ -6,6 +6,8 @@ import FortuneInput from "../../components/FortuneInput";
 
 import "./index.scss";
 
+const lamp = require("../../unnamedopaque.png");
+
 class Fortune extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +15,8 @@ class Fortune extends Component {
     this.state = {
       fortune: null,
       question: "",
-      showFortune: false
+      showFortune: false,
+      questionPosed: false
     };
   }
 
@@ -32,21 +35,36 @@ class Fortune extends Component {
   }
 
   render() {
+    const questionClass =
+      this.state.questionPosed === true
+        ? "question-container-posed"
+        : "question-container-regular";
+
+    const focusedClass = this.props.focused == "true" ? "#2c2122" : "#1a1a1a";
+
     if (this.state.fortune && this.state.showFortune) {
-      return this.state.fortune;
+      return <p className="fortune">{this.state.fortune}</p>;
     } else {
       return (
         <Fragment>
-          <Genie {...this.props} />
+          <Genie questionPosed={this.state.questionPosed} {...this.props} />
           <div className="fortune-container">
-            <p>You have awakened the genie...</p>
-            <FortuneInput {...this.props} />
-            <button
-              disabled={!this.state.question}
+            <FortuneInput
+              questionPosed={this.state.questionPosed}
+              setQuestionPosed={posed =>
+                this.setState({ questionPosed: posed })
+              }
+              {...this.props}
+            />
+            <div
+              className={questionClass}
+              style={{ backgroundColor: focusedClass }}
+              onMouseEnter={() => this.setState({ questionPosed: true })}
+              onMouseLeave={() => this.setState({ questionPosed: false })}
               onClick={() => this.setState({ showFortune: true })}
             >
-              Ask away
-            </button>
+              <p>Find your fortune</p>
+            </div>
           </div>
         </Fragment>
       );

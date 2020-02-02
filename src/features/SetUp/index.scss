@@ -1,0 +1,56 @@
+.text {
+  color: white;
+  font-size: 19px;
+
+  max-width: 60%;
+  display: flex;
+  flex-wrap: wrap;
+
+  text-align: center;
+
+  line-height: 50px;
+}
+
+textarea {
+  &:focus {
+    outline: none;
+  }
+
+  border-radius: 5px;
+}
+
+button {
+  height: 85px;
+  width: 400px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+
+  background-color: #1a1a1a;
+  color: white;
+
+  border: 1px solid white;
+  border-radius: 3px;
+
+  transition: color 0.4s linear, border 0.4s linear;
+
+  font-size: 17px;
+
+  &:hover {
+    color: #00cc99;
+    border: 1px solid #00cc99;
+
+    transition: color 0.4s linear, border 0.4s linear;
+  }
+}
+
+.link {
+  text-decoration: none;
+  color: #ff3333;
+  font-size: 26px;
+  transition: color 2s linear;
+
+  &:hover {
+    color: #800000;
+    transition: color 2s linear;
+  }
+}

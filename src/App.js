@@ -36,7 +36,18 @@ class App extends Component {
               )}
             />
             <Route path="/config" component={SetUp} />
-            <Route path="/:fortuneId" component={Fortune} />
+
+            <Route
+              path="/:fortuneId"
+              render={routeProps => (
+                <Fortune
+                  setFocus={focused => this.setState({ focused })}
+                  setEyes={eyePosition => this.setState({ eyePosition })}
+                  {...this.state}
+                  {...routeProps}
+                />
+              )}
+            />
           </Switch>
         </Router>
       </div>
