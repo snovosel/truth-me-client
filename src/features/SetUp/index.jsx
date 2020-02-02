@@ -16,7 +16,7 @@ class SetUp extends Component {
   }
 
   handleOnSend() {
-    fetch("http://localhost:3030/fortune", {
+    fetch("http://psst.novowd.com/fortune", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

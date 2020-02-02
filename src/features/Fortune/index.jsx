@@ -24,7 +24,7 @@ class Fortune extends Component {
     const fortuneId = this.props.match.params.fortuneId;
 
     if (fortuneId) {
-      fetch("http://localhost:3030/fortune/" + fortuneId)
+      fetch("http://psst.novowd.com/fortune/" + fortuneId)
         .then(response => response.json())
         .then(data => {
           this.setState({
