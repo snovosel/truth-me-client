@@ -23,7 +23,11 @@ class Fortune extends Component {
   componentDidMount() {
     const fortuneId = this.props.match.params.fortuneId;
 
+    console.log("welc.eom", this.props.match);
+
     if (fortuneId) {
+      this.props.history.replace("/");
+
       fetch("http://psst.novowd.com/fortune/" + fortuneId)
         .then(response => response.json())
         .then(data => {

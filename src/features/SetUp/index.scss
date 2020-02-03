@@ -1,22 +1,48 @@
+.text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 70%;
+}
+
 .text {
   color: white;
   font-size: 19px;
 
-  max-width: 60%;
   display: flex;
   flex-wrap: wrap;
 
   text-align: center;
 
   line-height: 50px;
+  margin-bottom: 0;
+  margin-top: 0;
+
+  @media only screen and (max-width: 600px) {
+    line-height: 35px;
+  }
 }
 
-textarea {
+.fortune-textarea {
+  border-radius: 5px;
+
+  color: black;
+  padding: 20px;
+  margin-top: 20px;
+  font-size: 18px;
+  letter-spacing: 2px;
+
+  max-width: 70%;
+
   &:focus {
     outline: none;
   }
 
-  border-radius: 5px;
+  @media only screen and (max-width: 599px) {
+    height: 90px;
+    font-size: 14px;
+  }
 }
 
 button {
@@ -24,6 +50,8 @@ button {
   width: 400px;
   margin-top: 25px;
   margin-bottom: 25px;
+
+  max-width: 70%;
 
   background-color: #1a1a1a;
   color: white;
@@ -41,16 +69,73 @@ button {
 
     transition: color 0.4s linear, border 0.4s linear;
   }
+
+  &:focus {
+    outline: none;
+  }
+
+  @media only screen and (max-width: 600px) {
+    height: 60px;
+    width: 215px;
+  }
 }
 
 .link {
+  position: absolute;
+  bottom: 11%;
+  align-self: center;
   text-decoration: none;
   color: #ff3333;
   font-size: 26px;
   transition: color 2s linear;
 
   &:hover {
-    color: #800000;
-    transition: color 2s linear;
+    cursor: pointer;
+  }
+
+  @media only screen and (max-width: 600px) {
+    font-size: 22px;
+    bottom: 10%;
+  }
+}
+
+.copied {
+  position: absolute;
+  bottom: 5%;
+  align-self: center;
+  color: white;
+
+  opacity: 1;
+  transition: opacity 1s linear;
+
+  padding: 12px;
+  border: 1px solid white;
+  border-radius: 5px;
+  // animation: fadeIn 7s linear;
+
+  @media only screen and (max-width: 600px) {
+    bottom: 3%;
+    padding: 10px;
+    font-size: 11px;
+  }
+}
+
+.hidden {
+  position: absolute;
+  bottom: 240px;
+  align-self: center;
+  color: white;
+  opacity: 0;
+
+  transition: opacity 1s linear;
+}
+
+@keyframes fadeIn {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
   }
 }
