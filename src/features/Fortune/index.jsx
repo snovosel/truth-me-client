@@ -28,7 +28,7 @@ class Fortune extends Component {
     if (fortuneId) {
       this.props.history.replace("/");
 
-      fetch("http://psst.novowd.com/fortune/" + fortuneId)
+      fetch("https://psst.novowd.com/fortune/" + fortuneId)
         .then(response => response.json())
         .then(data => {
           this.setState({

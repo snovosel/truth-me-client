@@ -20,7 +20,7 @@ class SetUp extends Component {
   handleOnSend() {
     const { fortune, uri } = this.state;
     if (fortune !== " " && fortune !== null && fortune !== "" && uri === null) {
-      fetch("http://psst.novowd.com/fortune", {
+      fetch("https://psst.novowd.com/fortune", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -64,7 +64,7 @@ class SetUp extends Component {
         <button onClick={this.handleOnSend}>Create Fortune</button>
         {this.state.uri && (
           <p onClick={this.handleCopyClick} className="link">
-            localhost:3000/{this.state.uri}
+            psst.novowd.com/{this.state.uri}
           </p>
         )}
         {this.state.copied ? (
