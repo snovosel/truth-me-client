@@ -37,7 +37,7 @@ class SetUp extends Component {
   }
 
   handleCopyClick(e) {
-    window.navigator.clipboard.writeText(`localhost:3000/${this.state.uri}`);
+    window.navigator.clipboard.writeText(`psst.novowd.com/${this.state.uri}`);
 
     this.setState({
       copied: true
