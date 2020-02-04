@@ -48,6 +48,11 @@ input {
   &::placeholder {
     text-align: center;
   }
+
+  @media only screen and (max-width: 600px) {
+    width: 85%;
+    height: 90px;
+  }
 }
 
 .input {

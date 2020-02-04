@@ -47,6 +47,10 @@
   }
 
   transition: background-color 0.2s linear, border 1s linear;
+
+  @media only screen and (max-width: 600px) {
+    width: 85%;
+  }
 }
 
 .question-container {

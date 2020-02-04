@@ -6,6 +6,10 @@
   max-width: 375px;
 
   @include make_flex(row, space-between, center);
+
+  @media only screen and (max-width: 600px) {
+    width: 85%;
+  }
 }
 
 .eye,
