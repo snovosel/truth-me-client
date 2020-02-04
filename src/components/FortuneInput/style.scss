@@ -36,6 +36,7 @@
 }
 
 input {
+  height: 100px;
   width: 60%;
   border: none;
   font-size: 36px;
@@ -51,13 +52,15 @@ input {
 
   @media only screen and (max-width: 600px) {
     width: 85%;
-    height: 90px;
+    height: 65px;
+
+    &::placeholder {
+      font-size: 28px;
+    }
   }
 }
 
 .input {
-  height: 100px;
-
   transition: height 0.2s linear, background-color 0.2s linear;
 }
 

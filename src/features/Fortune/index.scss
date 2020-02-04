@@ -50,8 +50,13 @@
 
   @media only screen and (max-width: 600px) {
     width: 85%;
+    height: 65px;
 
     padding-top: -50px;
+
+    p {
+      font-size: 28px;
+    }
   }
 }
 
