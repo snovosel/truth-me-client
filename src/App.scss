@@ -75,5 +75,11 @@ textarea {
     align-items: center;
 
     transition: background-color 0.2s linear;
+
+    @media only screen and (max-width: 600px) {
+      height: 100%;
+
+      justify-content: flex-start;
+    }
   }
 }

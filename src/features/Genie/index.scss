@@ -8,7 +8,10 @@
   @include make_flex(row, space-between, center);
 
   @media only screen and (max-width: 600px) {
-    width: 85%;
+    width: 61%;
+    height: 300px;
+
+    // max-height: 300px;
   }
 }
 
@@ -19,6 +22,11 @@
   background-color: white;
   border-radius: 50%;
 
+  @media only screen and (max-width: 600px) {
+    height: 85px;
+    width: 145px;
+  }
+
   .pupil,
   .pupil-focused {
     height: 30px;
@@ -28,6 +36,12 @@
     top: 20%;
     border-radius: 50%;
     transform: rotate(90deg);
+
+    @media only screen and (max-width: 600px) {
+      height: 15px;
+      width: 12px;
+      top: 10%;
+    }
   }
 }
 
@@ -63,6 +77,10 @@
 
     transition: right 0.2s linear, top 0.2s linear, height 2s linear,
       width 2s linear;
+
+    @media only screen and (max-width: 600px) {
+      right: 20%;
+    }
   }
 }
 
