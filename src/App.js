@@ -15,7 +15,7 @@ class App extends Component {
       focused: false
     };
 
-    this.updateDimensions = this.updateDimensions.bind(this);
+    // this.updateDimensions = this.updateDimensions.bind(this);
   }
 
   // componentDidUpdate(prevProps, prevState) {
@@ -32,17 +32,17 @@ class App extends Component {
   //   }
   // }
 
-  componentDidMount() {
-    window.addEventListener("resize", this.updateDimensions);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions);
-  }
-
-  updateDimensions() {
-    this.setState({ height: window.innerHeight });
-  }
+  // componentDidMount() {
+  //   window.addEventListener("resize", this.updateDimensions);
+  // }
+  //
+  // componentWillUnmount() {
+  //   window.removeEventListener("resize", this.updateDimensions);
+  // }
+  //
+  // updateDimensions() {
+  //   this.setState({ height: window.innerHeight });
+  // }
 
   render() {
     console.log("this.state.height", this.state.height);

@@ -9,7 +9,8 @@ class FortuneInput extends Component {
     super(props);
     this.state = {
       value: "",
-      count: 0
+      count: 0,
+      height: null
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -23,16 +24,26 @@ class FortuneInput extends Component {
     this.updateDimensions = this.updateDimensions.bind(this);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (
-      nextProps.focused !== this.props.focused ||
-      nextState.value !== this.state.value ||
-      nextState.count !== this.state.count
-    ) {
-      return true;
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   if (
+  //     nextProps.focused !== this.props.focused ||
+  //     nextState.value !== this.state.value ||
+  //     nextState.count !== this.state.count
+  //   ) {
+  //     return true;
+  //   }
+  //
+  //   return false;
+  // }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.height > prevState.height) {
+      alert("closed");
     }
 
-    return false;
+    if (this.state.height < prevState.height) {
+      alert("open");
+    }
   }
 
   componentDidMount() {
