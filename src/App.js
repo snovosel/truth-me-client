@@ -37,7 +37,17 @@ class App extends Component {
 
     return (
       <div className={containerClass}>
-        <p style={{ color: "white" }}>{this.state.height}</p>
+        <p
+          style={{
+            color: "white",
+            position: "absolute",
+            top: "50%",
+            left: "0%",
+            zIndex: 999
+          }}
+        >
+          {this.state.height}
+        </p>
         <Router>
           <Switch>
             <Route
