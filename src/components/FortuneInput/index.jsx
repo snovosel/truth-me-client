@@ -66,14 +66,6 @@ class FortuneInput extends Component {
   }
 
   handleFocus() {
-    const input = document.getElementById("fortune-input");
-
-    if (input) {
-      console.log("this.ref.offset", input.offsetTop);
-
-      document.body.scrollTop = input.offsetTop + 15;
-    }
-
     this.props.setFocus("true");
 
     // document.body.scrollTop = this.ref.offset
