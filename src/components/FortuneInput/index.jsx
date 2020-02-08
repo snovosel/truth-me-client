@@ -72,7 +72,7 @@ class FortuneInput extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
+    e.target.blur();
     this.props.poseQuestion(this.state.value);
   }
 
