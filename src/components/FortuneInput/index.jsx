@@ -45,7 +45,6 @@ class FortuneInput extends Component {
       this.setState({ condition: "COMPONENT DID UPDATE YO" });
     } else if (this.state.height < prevState.height) {
       this.props.setFocus("true");
-      this.props.resetQuestion();
       this.setState({ condition: "true" });
     } else if (this.state.clicked === true) {
       this.props.setFocus("true");
