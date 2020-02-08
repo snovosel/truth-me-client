@@ -24,6 +24,12 @@ class App extends Component {
         focused: false
       });
     }
+
+    if (prevState.height > this.state.height) {
+      this.setState({
+        focused: true
+      });
+    }
   }
 
   componentDidMount() {
