@@ -12,6 +12,9 @@ class Genie extends Component {
     let eyePostitionVal = eyePosition;
     let eyeLidClassBottom = "bottom";
 
+    const elePupilPosition =
+      focused == "true" ? { top: `${50 - eyePostitionVal}%` } : { top: "40%" };
+
     if (questionPosed === true) {
       pupilClass = "pupil-focused";
       eyeLidClassTop = "open-top";
@@ -27,18 +30,12 @@ class Genie extends Component {
       <div className="genie-container">
         <div className={"eye"}>
           <div className={eyeLidClassTop} style={eyeLidColor} />
-          <div
-            className={pupilClass}
-            style={{ top: `${50 - eyePostitionVal}%` }}
-          />
+          <div className={pupilClass} style={elePupilPosition} />
           <div className={eyeLidClassBottom} style={eyeLidColor} />
         </div>
         <div className={"eye"}>
           <div className={`${eyeLidClassTop}-second`} style={eyeLidColor} />
-          <div
-            className={pupilClass}
-            style={{ top: `${50 - eyePostitionVal}%` }}
-          />
+          <div className={pupilClass} style={elePupilPosition} />
           <div className={`${eyeLidClassBottom}-second`} style={eyeLidColor} />
         </div>
       </div>

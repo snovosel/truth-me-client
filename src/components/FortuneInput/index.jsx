@@ -15,6 +15,8 @@ class FortuneInput extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.determineClassName = this.determineClassName.bind(this);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -35,6 +37,12 @@ class FortuneInput extends Component {
 
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.handleClickOutside);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    this.props.poseQuestion(this.state.value);
   }
 
   handleClickOutside(event) {
@@ -65,30 +73,36 @@ class FortuneInput extends Component {
       },
       () => {
         this.props.setEyes(this.state.value.length);
+        this.props.setFocus("true");
+        this.props.resetQuestion();
 
-        if (this.state.value.split("").some(char => char === "?")) {
-          // this.props.setQuestionPosed(true);
-        } else {
-          this.props.setQuestionPosed(false);
-        }
+        this.props.setQuestionPosed(false);
+
+        // if (this.state.value.split("").some(char => char === "?")) {
+        //   this.props.setQuestionPosed(true);
+        // } else {
+        //   this.props.setQuestionPosed(false);
+        // }
       }
     );
   }
 
   render() {
     return (
-      <input
-        ref={ref => {
-          this.input = ref;
-        }}
-        type="text"
-        className={this.determineClassName()}
-        onFocus={() => this.props.setFocus("true")}
-        value={this.state.value}
-        maxLength={MAX_CHARACTERS}
-        onChange={this.handleChange}
-        placeholder="...Ask away"
-      />
+      <form onSubmit={this.handleSubmit}>
+        <input
+          ref={ref => {
+            this.input = ref;
+          }}
+          type="text"
+          className={this.determineClassName()}
+          onFocus={() => this.props.setFocus("true")}
+          value={this.state.value}
+          maxLength={MAX_CHARACTERS}
+          onChange={this.handleChange}
+          disabled={this.props.unlocked === true}
+        />
+      </form>
     );
   }
 }

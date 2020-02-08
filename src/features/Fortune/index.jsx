@@ -8,6 +8,8 @@ import "./index.scss";
 
 const lamp = require("../../unnamedopaque.png");
 
+const MAGIC_WORDS = "le pain perdu est perdu";
+
 class Fortune extends Component {
   constructor(props) {
     super(props);
@@ -16,8 +18,14 @@ class Fortune extends Component {
       fortune: null,
       question: "",
       showFortune: false,
-      questionPosed: false
+      questionPosed: false,
+      focused: false,
+      eyePosition: null,
+      magicWords: false,
+      unlocked: false
     };
+
+    this.handlePoseQuestion = this.handlePoseQuestion.bind(this);
   }
 
   componentDidMount() {
@@ -33,43 +41,115 @@ class Fortune extends Component {
             fortune: data.fortune
           });
         });
+
+      // fetch("http://localhost:8080/fortune/" + fortuneId)
+      //   .then(response => response.json())
+      //   .then(data => {
+      //     this.setState({
+      //       fortune: data.fortune
+      //     });
+      //   });
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.state.unlocked === true) {
+      setTimeout(() => {
+        this.setState({
+          showFortune: true
+        });
+      }, 2000);
+    }
+  }
+
+  handlePoseQuestion(question) {
+    if (question === MAGIC_WORDS) {
+      this.setState({
+        magicWords: this.state.fortune ? true : false,
+        focused: false,
+        questionPosed: true,
+        unlocked: this.state.fortune ? true : false
+      });
+    }
+
+    if (question !== MAGIC_WORDS) {
+      this.setState({
+        magicWords: false,
+        focused: false,
+        questionPosed: true
+      });
+    }
+
+    if (question === "" || question === null || question === false) {
+      this.setState({
+        focused: false
+      });
+    }
+  }
+
+  renderResponse() {
+    if (this.state.magicWords === true) {
+      return "Bien dit mon gars";
+    }
+
+    if (this.state.magicWords === false) {
+      return "Are you trying to waste my time?";
     }
   }
 
   render() {
-    const questionClass =
-      this.state.questionPosed === true
-        ? "question-container-posed"
-        : "question-container-regular";
+    const focusedClass = this.state.focused == "true" ? "#2c2122" : "#1a1a1a";
+    const containerClass =
+      this.state.focused == "true" ? "container-focused" : "container";
 
-    const focusedClass = this.props.focused == "true" ? "#2c2122" : "#1a1a1a";
+    const magicWordClass =
+      this.state.questionPosed == true ? "response" : "empty";
+
+    const loadingClass = this.state.unlocked === true ? "loading" : "default";
+
+    return (
+      <Fragment>
+        {this.state.showFortune ? (
+          <p className="fortune">{this.state.fortune}</p>
+        ) : (
+          <p className="hidden" />
+        )}
+        <div className={loadingClass}>
+          <div className={containerClass}>
+            <Genie
+              setFocus={focused => this.setState({ focused })}
+              setEyes={eyePosition => this.setState({ eyePosition })}
+              focused={this.state.focused}
+              eyePosition={this.state.eyePosition}
+              {...this.props}
+            />
+            <p className="instructions">
+              Say the magic words to reveal your fortune
+            </p>
+            <div className="fortune-container">
+              <FortuneInput
+                poseQuestion={this.handlePoseQuestion}
+                setFocus={focused => this.setState({ focused })}
+                setEyes={eyePosition => this.setState({ eyePosition })}
+                resetQuestion={() => this.setState({ magicWords: false })}
+                setQuestionPosed={posed =>
+                  this.setState({ questionPosed: posed })
+                }
+                {...this.props}
+                {...this.state}
+              />
+              <p className="hint">Hint: le pain perdu est perdu</p>
+            </div>
+
+            <p className={magicWordClass}>{this.renderResponse()}</p>
+          </div>
+        </div>
+      </Fragment>
+    );
 
     if (this.state.fortune && this.state.showFortune) {
       return <p className="fortune">{this.state.fortune}</p>;
     } else {
-      return (
-        <Fragment>
-          <Genie questionPosed={this.state.questionPosed} {...this.props} />
-          <div className="fortune-container">
-            <FortuneInput
-              questionPosed={this.state.questionPosed}
-              setQuestionPosed={posed =>
-                this.setState({ questionPosed: posed })
-              }
-              {...this.props}
-            />
-            <div
-              className={questionClass}
-              style={{ backgroundColor: focusedClass }}
-              onMouseEnter={() => this.setState({ questionPosed: true })}
-              onMouseLeave={() => this.setState({ questionPosed: false })}
-              onClick={() => this.setState({ showFortune: true })}
-            >
-              <p>Find your fortune</p>
-            </div>
-          </div>
-        </Fragment>
-      );
     }
   }
 }

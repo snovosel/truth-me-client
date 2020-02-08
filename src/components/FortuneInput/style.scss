@@ -35,16 +35,24 @@
   }
 }
 
-input {
-  height: 100px;
+form {
   width: 60%;
+  align-self: center;
+
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+  }
+}
+
+input {
+  width: 100%;
   border: none;
-  font-size: 36px;
+  font-size: 26px;
   letter-spacing: 2px;
   border-radius: 3px;
-  font-family: "Amatic SC", cursive;
+  font-family: "Open Sans", sans-serif;
   box-sizing: border-box;
-  padding: 10px;
+  padding: 15px;
 
   &::placeholder {
     text-align: center;
@@ -54,7 +62,7 @@ input {
     width: 100%;
     height: 75px;
 
-    font-size: 22px;
+    font-size: 20px;
 
     &::placeholder {
       font-size: 28px;
@@ -68,8 +76,6 @@ input {
 
 .focused {
   outline: none;
-
-  height: 55px;
 
   background-color: rgba(190, 167, 171, 0.5);
   transition: height 0.2s linear, background-color 0.2s linear;

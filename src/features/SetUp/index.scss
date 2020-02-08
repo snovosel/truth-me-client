@@ -24,6 +24,22 @@
   }
 }
 
+.target-name {
+  margin-top: 45px;
+  width: 20%;
+
+  height: 50px;
+
+  font-size: 18px;
+  font-family: sans-serif;
+
+  &::placeholder {
+    font-size: 15px;
+    text-align: center;
+    font-family: sans-serif;
+  }
+}
+
 .fortune-textarea {
   border-radius: 5px;
 
@@ -34,6 +50,10 @@
   letter-spacing: 2px;
 
   max-width: 70%;
+
+  &::placeholder {
+    color: #bfbfbf;
+  }
 
   &:focus {
     outline: none;

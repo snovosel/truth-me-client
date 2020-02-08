@@ -10,10 +10,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      focused: false,
-      eyePosition: null
-    };
+    this.state = {};
   }
   render() {
     const containerClass =
@@ -26,14 +23,7 @@ class App extends Component {
             <Route
               exact
               path="/"
-              render={routeProps => (
-                <Fortune
-                  setFocus={focused => this.setState({ focused })}
-                  setEyes={eyePosition => this.setState({ eyePosition })}
-                  {...this.state}
-                  {...routeProps}
-                />
-              )}
+              render={routeProps => <Fortune {...this.state} {...routeProps} />}
             />
             <Route path="/config" component={SetUp} />
 

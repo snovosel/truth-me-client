@@ -2,7 +2,7 @@
 
 .genie-container {
   height: 400px;
-  width: 35%;
+  width: 55%;
   max-width: 375px;
 
   @include make_flex(row, space-between, center);
@@ -33,7 +33,7 @@
     width: 20px;
     background-color: black;
     position: absolute;
-    top: 20%;
+    // top: 20%;
     border-radius: 50%;
     transform: rotate(90deg);
 
@@ -67,7 +67,7 @@
 
   .pupil {
     right: 40%;
-
+    top: 20%;
     transition: right 0.2s linear, top 0.2s linear, height 2s linear,
       width 2s linear;
   }
