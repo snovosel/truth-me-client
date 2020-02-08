@@ -10,7 +10,8 @@ class FortuneInput extends Component {
     this.state = {
       value: "",
       count: 0,
-      height: null
+      height: null,
+      condition: "false"
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -36,15 +37,19 @@ class FortuneInput extends Component {
   //   return false;
   // }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (this.state.height > prevState.height) {
-  //     this.props.setFocus("false");
-  //   }
-  //
-  //   if (this.state.height < prevState.height) {
-  //     this.props.setFocus("true");
-  //   }
-  // }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.height > prevState.height) {
+      // this.props.setFocus("false");
+
+      this.setState({ condition: "true" });
+    }
+
+    if (this.state.height < prevState.height) {
+      // this.props.setFocus("true");
+
+      this.setState({ condition: "false" });
+    }
+  }
 
   componentDidMount() {
     document.addEventListener("mousedown", this.handleClickOutside);
@@ -128,6 +133,7 @@ class FortuneInput extends Component {
           maxLength={MAX_CHARACTERS}
           onChange={this.handleChange}
           disabled={this.props.unlocked === true}
+          placeholder={this.state.condition}
         />
       </form>
     );
