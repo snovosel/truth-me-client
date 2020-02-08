@@ -74,8 +74,7 @@ class FortuneInput extends Component {
   }
 
   handleFocus() {
-    this.props.setFocus("true");
-
+    // this.props.setFocus("true");
     // document.body.scrollTop = this.ref.offset
   }
 
