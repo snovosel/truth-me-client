@@ -106,6 +106,7 @@ class FortuneInput extends Component {
           id="fortune-input"
           className={this.determineClassName()}
           onFocus={this.handleFocus}
+          onBlur={() => this.props.setFocus("false")}
           value={this.state.value}
           maxLength={MAX_CHARACTERS}
           onChange={this.handleChange}
