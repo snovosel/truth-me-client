@@ -11,7 +11,7 @@ class FortuneInput extends Component {
       value: "",
       count: 0,
       height: null,
-      condition: "false"
+      condition: "NULL"
     };
 
     this.handleChange = this.handleChange.bind(this);
