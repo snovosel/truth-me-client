@@ -127,9 +127,6 @@ class Fortune extends Component {
         )}
         <div className={loadingClass}>
           <div className={containerClass}>
-            <p style={focusedHeight}>
-              {this.props.focused == "true" ? "true" : "false"}
-            </p>
             <Genie
               setEyes={eyePosition => this.setState({ eyePosition })}
               focused={this.props.focused}
