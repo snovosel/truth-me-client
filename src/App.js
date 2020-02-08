@@ -15,7 +15,12 @@ class App extends Component {
       focused: false
     };
 
+    this.handleSetFocus = this.handleSetFocus.bind(this);
     // this.updateDimensions = this.updateDimensions.bind(this);
+  }
+
+  handleSetFocus(focused) {
+    this.setState({ focused });
   }
 
   // componentDidUpdate(prevProps, prevState) {
@@ -54,7 +59,7 @@ class App extends Component {
               path="/"
               render={routeProps => (
                 <Fortune
-                  setFocus={focused => this.setState({ focused })}
+                  setFocus={this.handleSetFocus}
                   setEyes={eyePosition => this.setState({ eyePosition })}
                   {...this.state}
                   {...routeProps}
@@ -67,7 +72,7 @@ class App extends Component {
               path="/:fortuneId"
               render={routeProps => (
                 <Fortune
-                  setFocus={focused => this.setState({ focused })}
+                  setFocus={this.handleSetFocus}
                   setEyes={eyePosition => this.setState({ eyePosition })}
                   {...this.state}
                   {...routeProps}
