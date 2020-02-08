@@ -89,7 +89,7 @@ class FortuneInput extends Component {
       },
       () => {
         this.props.setEyes(this.state.value.length);
-        this.props.setFocus("true");
+
         this.props.resetQuestion();
 
         this.props.setQuestionPosed(false);
