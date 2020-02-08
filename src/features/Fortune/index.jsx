@@ -98,14 +98,16 @@ class Fortune extends Component {
   }
 
   render() {
-    const focusedClass = this.state.focused == "true" ? "#2c2122" : "#1a1a1a";
+    const focusedClass = this.props.focused == "true" ? "#2c2122" : "#1a1a1a";
     const containerClass =
-      this.state.focused == "true" ? "container-focused" : "container";
+      this.props.focused == "true" ? "container-focused" : "container";
 
     const magicWordClass =
       this.state.questionPosed == true ? "response" : "empty";
 
     const loadingClass = this.state.unlocked === true ? "loading" : "default";
+
+    console.log("this.props", this.props);
 
     return (
       <Fragment>
@@ -117,9 +119,8 @@ class Fortune extends Component {
         <div className={loadingClass}>
           <div className={containerClass}>
             <Genie
-              setFocus={focused => this.setState({ focused })}
               setEyes={eyePosition => this.setState({ eyePosition })}
-              focused={this.state.focused}
+              focused={this.props.focused}
               eyePosition={this.state.eyePosition}
               {...this.props}
             />
@@ -129,7 +130,6 @@ class Fortune extends Component {
             <div className="fortune-container">
               <FortuneInput
                 poseQuestion={this.handlePoseQuestion}
-                setFocus={focused => this.setState({ focused })}
                 setEyes={eyePosition => this.setState({ eyePosition })}
                 resetQuestion={() => this.setState({ magicWords: false })}
                 setQuestionPosed={posed =>

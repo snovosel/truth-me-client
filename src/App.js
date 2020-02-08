@@ -11,10 +11,19 @@ class App extends Component {
     super(props);
 
     this.state = {
-      height: window.innerHeight
+      height: window.innerHeight,
+      focused: false
     };
 
     this.updateDimensions = this.updateDimensions.bind(this);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.height < this.state.height) {
+      this.setState({
+        focused: false
+      });
+    }
   }
 
   componentDidMount() {
@@ -30,13 +39,10 @@ class App extends Component {
   }
 
   render() {
-    const containerClass =
-      this.state.focused == "true" ? "container-focused" : "container";
-
     console.log("this.state.height", this.state.height);
 
     return (
-      <div className={containerClass}>
+      <div className="container">
         <p
           style={{
             color: "white",
@@ -53,7 +59,14 @@ class App extends Component {
             <Route
               exact
               path="/"
-              render={routeProps => <Fortune {...this.state} {...routeProps} />}
+              render={routeProps => (
+                <Fortune
+                  setFocus={focused => this.setState({ focused })}
+                  setEyes={eyePosition => this.setState({ eyePosition })}
+                  {...this.state}
+                  {...routeProps}
+                />
+              )}
             />
             <Route path="/config" component={SetUp} />
 
