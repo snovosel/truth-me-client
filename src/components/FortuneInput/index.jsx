@@ -140,7 +140,6 @@ class FortuneInput extends Component {
           maxLength={MAX_CHARACTERS}
           onChange={this.handleChange}
           disabled={this.props.unlocked === true}
-          placeholder={this.state.condition}
         />
       </form>
     );
