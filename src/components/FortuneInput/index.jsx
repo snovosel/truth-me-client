@@ -16,6 +16,8 @@ class FortuneInput extends Component {
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.determineClassName = this.determineClassName.bind(this);
 
+    this.handleFocus = this.handleFocus.bind(this);
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -63,6 +65,20 @@ class FortuneInput extends Component {
     }
   }
 
+  handleFocus() {
+    const input = document.getElementById("fortune-input");
+
+    if (input) {
+      console.log("this.ref.offset", input.offsetTop);
+
+      document.body.scrollTop = input.offsetTop + 15;
+    }
+
+    this.props.setFocus("true");
+
+    // document.body.scrollTop = this.ref.offset
+  }
+
   handleChange(e) {
     const { setEyes } = this.props;
     const { value } = this.state;
@@ -95,8 +111,9 @@ class FortuneInput extends Component {
             this.input = ref;
           }}
           type="text"
+          id="fortune-input"
           className={this.determineClassName()}
-          onFocus={() => this.props.setFocus("true")}
+          onFocus={this.handleFocus}
           value={this.state.value}
           maxLength={MAX_CHARACTERS}
           onChange={this.handleChange}
