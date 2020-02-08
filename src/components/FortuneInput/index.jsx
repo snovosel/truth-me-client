@@ -38,11 +38,11 @@ class FortuneInput extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.height > prevState.height) {
-      alert("closed");
+      this.props.setFocus("false");
     }
 
     if (this.state.height < prevState.height) {
-      alert("open");
+      this.props.setFocus("true");
     }
   }
 
