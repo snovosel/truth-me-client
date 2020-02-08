@@ -10,7 +10,7 @@ class FortuneInput extends Component {
     this.state = {
       value: "",
       count: 0,
-      height: null,
+      height: window.innerHeight,
       condition: "NULL"
     };
 
