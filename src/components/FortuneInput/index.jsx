@@ -94,10 +94,7 @@ class FortuneInput extends Component {
   }
 
   handleFocus() {
-    // this.props.setFocus("true");
-
     this.setState({ condition: "handle focus", clicked: true });
-    // document.body.scrollTop = this.ref.offset
   }
 
   handleChange(e) {
@@ -114,12 +111,6 @@ class FortuneInput extends Component {
         this.props.resetQuestion();
 
         this.props.setQuestionPosed(false);
-
-        // if (this.state.value.split("").some(char => char === "?")) {
-        //   this.props.setQuestionPosed(true);
-        // } else {
-        //   this.props.setQuestionPosed(false);
-        // }
       }
     );
   }

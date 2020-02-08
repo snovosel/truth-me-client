@@ -106,7 +106,9 @@ class Fortune extends Component {
       this.props.focused == "true" ? "container-focused" : "container";
 
     const magicWordClass =
-      this.state.questionPosed == true ? "response" : "empty";
+      this.state.questionPosed == true && this.props.focused != "true"
+        ? "response"
+        : "empty";
 
     const loadingClass = this.state.unlocked === true ? "loading" : "default";
 
