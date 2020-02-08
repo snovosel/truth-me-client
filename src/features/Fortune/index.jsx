@@ -107,8 +107,6 @@ class Fortune extends Component {
 
     const loadingClass = this.state.unlocked === true ? "loading" : "default";
 
-    console.log("this.props", this.props);
-
     const focusedHeight = {
       color: "white",
       position: "absolute",
@@ -116,8 +114,6 @@ class Fortune extends Component {
       left: "0%",
       zIndex: 999
     };
-
-    console.log("this.props.focused", this.props.focused);
 
     return (
       <Fragment>

@@ -36,15 +36,15 @@ class FortuneInput extends Component {
   //   return false;
   // }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.height > prevState.height) {
-      this.props.setFocus("false");
-    }
-
-    if (this.state.height < prevState.height) {
-      this.props.setFocus("true");
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (this.state.height > prevState.height) {
+  //     this.props.setFocus("false");
+  //   }
+  //
+  //   if (this.state.height < prevState.height) {
+  //     this.props.setFocus("true");
+  //   }
+  // }
 
   componentDidMount() {
     document.addEventListener("mousedown", this.handleClickOutside);
