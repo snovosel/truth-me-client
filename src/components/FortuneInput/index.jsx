@@ -45,7 +45,7 @@ class FortuneInput extends Component {
     }
 
     if (this.state.height < prevState.height) {
-      // this.props.setFocus("true");
+      this.props.setFocus("true");
 
       this.setState({ condition: "true" });
     }
@@ -106,7 +106,7 @@ class FortuneInput extends Component {
       },
       () => {
         this.props.setEyes(this.state.value.length);
-
+        this.props.setFocus("true");
         this.props.resetQuestion();
 
         this.props.setQuestionPosed(false);

@@ -19,7 +19,6 @@ class Fortune extends Component {
       question: "",
       showFortune: false,
       questionPosed: false,
-      focused: false,
       eyePosition: null,
       magicWords: false,
       unlocked: false
@@ -66,23 +65,27 @@ class Fortune extends Component {
     if (question === MAGIC_WORDS) {
       this.setState({
         magicWords: this.state.fortune ? true : false,
-        focused: false,
+        // focused: false,
         questionPosed: true,
         unlocked: this.state.fortune ? true : false
       });
+
+      this.props.setFocus("false");
     }
 
     if (question !== MAGIC_WORDS) {
       this.setState({
         magicWords: false,
-        focused: false,
+        // focused: false,
         questionPosed: true
       });
+
+      this.props.setFocus("false");
     }
 
     if (question === "" || question === null || question === false) {
       this.setState({
-        focused: false
+        // focused: false
       });
     }
   }
