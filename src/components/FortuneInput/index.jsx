@@ -11,7 +11,8 @@ class FortuneInput extends Component {
       value: "",
       count: 0,
       height: window.innerHeight,
-      condition: "NULL"
+      condition: "NULL",
+      cherry: true
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -38,14 +39,14 @@ class FortuneInput extends Component {
   // }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.height > prevState.height) {
+    if (this.state.height > prevState.height && this.state.cherry === false) {
       this.props.setFocus("false");
 
       this.setState({ condition: "COMPONENT DID UPDATE YO" });
     }
 
     if (this.state.height < prevState.height) {
-      this.props.setFocus("true");
+      this.props.setFocus("true" && this.state.cherry === false);
 
       this.setState({ condition: "true" });
     }
@@ -92,7 +93,7 @@ class FortuneInput extends Component {
   handleFocus() {
     this.props.setFocus("true");
 
-    this.setState({ condition: "handle focus" });
+    this.setState({ condition: "handle focus", cherry: false });
     // document.body.scrollTop = this.ref.offset
   }
 
