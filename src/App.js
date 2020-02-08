@@ -58,7 +58,7 @@ class App extends Component {
     const focusedHeight = {
       color: "white",
       position: "absolute",
-      top: "55%",
+      top: "25%",
       left: "0%",
       zIndex: 999
     };
