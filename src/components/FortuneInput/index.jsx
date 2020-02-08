@@ -41,13 +41,13 @@ class FortuneInput extends Component {
     if (this.state.height > prevState.height) {
       this.props.setFocus("false");
 
-      this.setState({ condition: "true" });
+      this.setState({ condition: "false" });
     }
 
     if (this.state.height < prevState.height) {
       // this.props.setFocus("true");
 
-      this.setState({ condition: "false" });
+      this.setState({ condition: "true" });
     }
   }
 
