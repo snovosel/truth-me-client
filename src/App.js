@@ -10,14 +10,34 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      height: window.innerHeight
+    };
+
+    this.updateDimensions = this.updateDimensions.bind(this);
   }
+
+  componentDidMount() {
+    window.addEventListener("resize", this.updateDimensions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions);
+  }
+
+  updateDimensions() {
+    this.setState({ height: window.innerHeight });
+  }
+
   render() {
     const containerClass =
       this.state.focused == "true" ? "container-focused" : "container";
 
+    console.log("this.state.height", this.state.height);
+
     return (
       <div className={containerClass}>
+        <p style={{ color: "white" }}>{this.state.height}</p>
         <Router>
           <Switch>
             <Route

@@ -19,6 +19,8 @@ class FortuneInput extends Component {
     this.handleFocus = this.handleFocus.bind(this);
 
     this.handleSubmit = this.handleSubmit.bind(this);
+
+    this.updateDimensions = this.updateDimensions.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -35,10 +37,16 @@ class FortuneInput extends Component {
 
   componentDidMount() {
     document.addEventListener("mousedown", this.handleClickOutside);
+    window.addEventListener("resize", this.updateDimensions);
   }
 
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.handleClickOutside);
+    window.removeEventListener("resize", this.updateDimensions);
+  }
+
+  updateDimensions() {
+    this.setState({ height: window.innerHeight });
   }
 
   handleSubmit(e) {
@@ -103,7 +111,6 @@ class FortuneInput extends Component {
             this.input = ref;
           }}
           type="text"
-          id="fortune-input"
           className={this.determineClassName()}
           onFocus={this.handleFocus}
           onBlur={() => this.props.setFocus("false")}
