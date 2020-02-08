@@ -65,7 +65,6 @@ class App extends Component {
 
     return (
       <div className="container">
-        <p style={styleHeight}>{this.state.height}</p>
         <p style={focusedHeight}>{this.state.focused}</p>
         <Router>
           <Switch>
