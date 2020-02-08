@@ -109,6 +109,16 @@ class Fortune extends Component {
 
     console.log("this.props", this.props);
 
+    const focusedHeight = {
+      color: "white",
+      position: "absolute",
+      top: "25%",
+      left: "0%",
+      zIndex: 999
+    };
+
+    console.log("this.props.focused", this.props.focused);
+
     return (
       <Fragment>
         {this.state.showFortune ? (
@@ -118,6 +128,9 @@ class Fortune extends Component {
         )}
         <div className={loadingClass}>
           <div className={containerClass}>
+            <p style={focusedHeight}>
+              {this.props.focused == "true" ? "true" : "false"}
+            </p>
             <Genie
               setEyes={eyePosition => this.setState({ eyePosition })}
               focused={this.props.focused}
