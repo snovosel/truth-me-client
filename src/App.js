@@ -18,19 +18,19 @@ class App extends Component {
     this.updateDimensions = this.updateDimensions.bind(this);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.height < this.state.height) {
-      this.setState({
-        focused: false
-      });
-    }
-
-    if (prevState.height > this.state.height) {
-      this.setState({
-        focused: true
-      });
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState.height < this.state.height) {
+  //     this.setState({
+  //       focused: false
+  //     });
+  //   }
+  //
+  //   if (prevState.height > this.state.height) {
+  //     this.setState({
+  //       focused: true
+  //     });
+  //   }
+  // }
 
   componentDidMount() {
     window.addEventListener("resize", this.updateDimensions);
