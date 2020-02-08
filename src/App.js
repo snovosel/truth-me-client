@@ -47,19 +47,26 @@ class App extends Component {
   render() {
     console.log("this.state.height", this.state.height);
 
+    const styleHeight = {
+      color: "white",
+      position: "absolute",
+      top: "50%",
+      left: "0%",
+      zIndex: 999
+    };
+
+    const focusedHeight = {
+      color: "white",
+      position: "absolute",
+      top: "55%",
+      left: "0%",
+      zIndex: 999
+    };
+
     return (
       <div className="container">
-        <p
-          style={{
-            color: "white",
-            position: "absolute",
-            top: "50%",
-            left: "0%",
-            zIndex: 999
-          }}
-        >
-          {this.state.height}
-        </p>
+        <p style={styleHeight}>{this.state.height}</p>
+        <p style={focusedHeight}>{this.state.focused}</p>
         <Router>
           <Switch>
             <Route
