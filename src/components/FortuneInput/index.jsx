@@ -39,7 +39,7 @@ class FortuneInput extends Component {
   // }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log("update");
+    // console.log("update");
     if (this.state.height > prevState.height) {
       console.log("this.state grew");
       this.props.setFocus("false");
@@ -49,13 +49,13 @@ class FortuneInput extends Component {
       console.log("this.state shrank");
       this.props.setFocus("true");
       this.setState({ condition: "true" });
-    } else if (this.state.clicked === true) {
-      // this.props.setFocus("true");
-
-      this.setState({
-        clicked: false
-      });
     }
+    //else if (this.state.clicked === true) {
+    // this.props.setFocus("true");
+    // this.setState({
+    //   clicked: false
+    // });
+    // }
   }
 
   componentDidMount() {
@@ -97,6 +97,7 @@ class FortuneInput extends Component {
   }
 
   handleFocus() {
+    console.log("focus class");
     this.setState({ condition: "handle focus", clicked: true }, () =>
       this.props.setFocus("true")
     );
