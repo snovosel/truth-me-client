@@ -12,42 +12,8 @@ class App extends Component {
 
     this.state = {
       height: window.innerHeight
-      // focused: false
     };
-
-    // this.handleSetFocus = this.handleSetFocus.bind(this);
-    // this.updateDimensions = this.updateDimensions.bind(this);
   }
-
-  // handleSetFocus(focused) {
-  //   this.setState({ focused });
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.height < this.state.height) {
-  //     this.setState({
-  //       focused: false
-  //     });
-  //   }
-  //
-  //   if (prevState.height > this.state.height) {
-  //     this.setState({
-  //       focused: true
-  //     });
-  //   }
-  // }
-
-  // componentDidMount() {
-  //   window.addEventListener("resize", this.updateDimensions);
-  // }
-  //
-  // componentWillUnmount() {
-  //   window.removeEventListener("resize", this.updateDimensions);
-  // }
-  //
-  // updateDimensions() {
-  //   this.setState({ height: window.innerHeight });
-  // }
 
   render() {
     return (
