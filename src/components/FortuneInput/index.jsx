@@ -39,15 +39,18 @@ class FortuneInput extends Component {
   // }
 
   componentDidUpdate(prevProps, prevState) {
+    console.log("update");
     if (this.state.height > prevState.height) {
+      console.log("this.state grew");
       this.props.setFocus("false");
 
       this.setState({ condition: "COMPONENT DID UPDATE YO" });
     } else if (this.state.height < prevState.height) {
+      console.log("this.state shrank");
       this.props.setFocus("true");
       this.setState({ condition: "true" });
     } else if (this.state.clicked === true) {
-      this.props.setFocus("true");
+      // this.props.setFocus("true");
 
       this.setState({
         clicked: false
@@ -79,7 +82,7 @@ class FortuneInput extends Component {
     const { setFocus } = this.props;
 
     if (this.input && !this.input.contains(event.target)) {
-      setFocus("false");
+      this.props.setFocus("false", "ref");
     }
   }
 
@@ -94,7 +97,9 @@ class FortuneInput extends Component {
   }
 
   handleFocus() {
-    this.setState({ condition: "handle focus", clicked: true });
+    this.setState({ condition: "handle focus", clicked: true }, () =>
+      this.props.setFocus("true")
+    );
   }
 
   handleChange(e) {
@@ -107,7 +112,7 @@ class FortuneInput extends Component {
       },
       () => {
         this.props.setEyes(this.state.value.length);
-        this.props.setFocus("true");
+
         this.props.resetQuestion();
 
         this.props.setQuestionPosed(false);

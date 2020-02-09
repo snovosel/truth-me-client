@@ -11,17 +11,17 @@ class App extends Component {
     super(props);
 
     this.state = {
-      height: window.innerHeight,
-      focused: false
+      height: window.innerHeight
+      // focused: false
     };
 
-    this.handleSetFocus = this.handleSetFocus.bind(this);
+    // this.handleSetFocus = this.handleSetFocus.bind(this);
     // this.updateDimensions = this.updateDimensions.bind(this);
   }
 
-  handleSetFocus(focused) {
-    this.setState({ focused });
-  }
+  // handleSetFocus(focused) {
+  //   this.setState({ focused });
+  // }
 
   // componentDidUpdate(prevProps, prevState) {
   //   if (prevState.height < this.state.height) {
@@ -57,27 +57,13 @@ class App extends Component {
             <Route
               exact
               path="/"
-              render={routeProps => (
-                <Fortune
-                  setFocus={this.handleSetFocus}
-                  setEyes={eyePosition => this.setState({ eyePosition })}
-                  {...this.state}
-                  {...routeProps}
-                />
-              )}
+              render={routeProps => <Fortune {...this.state} {...routeProps} />}
             />
             <Route path="/config" component={SetUp} />
 
             <Route
               path="/:fortuneId"
-              render={routeProps => (
-                <Fortune
-                  setFocus={this.handleSetFocus}
-                  setEyes={eyePosition => this.setState({ eyePosition })}
-                  {...this.state}
-                  {...routeProps}
-                />
-              )}
+              render={routeProps => <Fortune {...this.state} {...routeProps} />}
             />
           </Switch>
         </Router>

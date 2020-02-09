@@ -21,10 +21,12 @@ class Fortune extends Component {
       questionPosed: false,
       eyePosition: null,
       magicWords: false,
-      unlocked: false
+      unlocked: false,
+      focused: "false"
     };
 
     this.handlePoseQuestion = this.handlePoseQuestion.bind(this);
+    this.handleSetFocus = this.handleSetFocus.bind(this);
   }
 
   componentDidMount() {
@@ -67,20 +69,18 @@ class Fortune extends Component {
         magicWords: this.state.fortune ? true : false,
         // focused: false,
         questionPosed: true,
-        unlocked: this.state.fortune ? true : false
+        unlocked: this.state.fortune ? true : false,
+        focused: "false"
       });
-
-      this.props.setFocus("false");
     }
 
     if (question !== MAGIC_WORDS) {
       this.setState({
         magicWords: false,
         // focused: false,
-        questionPosed: true
+        questionPosed: true,
+        focused: "false"
       });
-
-      this.props.setFocus("false");
     }
 
     if (question === "" || question === null || question === false) {
@@ -100,10 +100,14 @@ class Fortune extends Component {
     }
   }
 
+  handleSetFocus(focused) {
+    this.setState({ focused });
+  }
+
   render() {
     const focusedClass = this.props.focused == "true" ? "#2c2122" : "#1a1a1a";
     const containerClass =
-      this.props.focused == "true" ? "container-focused" : "container";
+      this.state.focused == "true" ? "container-focused" : "container";
 
     const magicWordClass =
       this.state.questionPosed == true && this.props.focused != "true"
@@ -131,7 +135,7 @@ class Fortune extends Component {
           <div className={containerClass}>
             <Genie
               setEyes={eyePosition => this.setState({ eyePosition })}
-              focused={this.props.focused}
+              focused={this.state.focused}
               eyePosition={this.state.eyePosition}
               {...this.props}
             />
@@ -143,6 +147,7 @@ class Fortune extends Component {
                 poseQuestion={this.handlePoseQuestion}
                 setEyes={eyePosition => this.setState({ eyePosition })}
                 resetQuestion={() => this.setState({ magicWords: false })}
+                setFocus={this.handleSetFocus}
                 setQuestionPosed={posed =>
                   this.setState({ questionPosed: posed })
                 }
