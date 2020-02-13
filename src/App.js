@@ -6,36 +6,15 @@ import Fortune from "./features/Fortune";
 
 import "./App.scss";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      height: window.innerHeight
-    };
-  }
-
-  render() {
-    return (
-      <div className="container">
-        <Router>
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={routeProps => <Fortune {...this.state} {...routeProps} />}
-            />
-            <Route path="/config" component={SetUp} />
-
-            <Route
-              path="/:fortuneId"
-              render={routeProps => <Fortune {...this.state} {...routeProps} />}
-            />
-          </Switch>
-        </Router>
-      </div>
-    );
-  }
-}
+const App = () => (
+  <div className="container">
+    <Router>
+      <Switch>
+        <Route path="/config" component={SetUp} />
+        <Route path="/fortune/:fortuneId?" component={Fortune} />
+      </Switch>
+    </Router>
+  </div>
+);
 
 export default App;

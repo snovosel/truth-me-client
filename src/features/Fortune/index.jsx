@@ -1,20 +1,22 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 
 import Genie from "../Genie";
 
 import FortuneInput from "../../components/FortuneInput";
+import Response from "./components/Response";
 
 import "./index.scss";
 
 const lamp = require("../../unnamedopaque.png");
 
-const MAGIC_WORDS = "le pain perdu est perdu";
+const MAGIC_WORDS = "open sesame";
 
 class Fortune extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      value: "",
       fortune: null,
       question: "",
       showFortune: false,
@@ -27,13 +29,14 @@ class Fortune extends Component {
 
     this.handlePoseQuestion = this.handlePoseQuestion.bind(this);
     this.handleSetFocus = this.handleSetFocus.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
     const fortuneId = this.props.match.params.fortuneId;
 
     if (fortuneId) {
-      this.props.history.replace("/");
+      this.props.history.replace("/fortune");
 
       fetch("https://psst.novowd.com/fortune/" + fortuneId)
         .then(response => response.json())
@@ -41,6 +44,9 @@ class Fortune extends Component {
           this.setState({
             fortune: data.fortune
           });
+        })
+        .catch(error => {
+          console.log("error", error);
         });
 
       // fetch("http://localhost:8080/fortune/" + fortuneId)
@@ -63,29 +69,21 @@ class Fortune extends Component {
     }
   }
 
-  handlePoseQuestion(question) {
-    if (question === MAGIC_WORDS) {
+  handlePoseQuestion() {
+    if (this.state.value === MAGIC_WORDS) {
       this.setState({
         magicWords: this.state.fortune ? true : false,
-        // focused: false,
         questionPosed: true,
         unlocked: this.state.fortune ? true : false,
         focused: "false"
       });
     }
 
-    if (question !== MAGIC_WORDS) {
+    if (this.state.value !== MAGIC_WORDS) {
       this.setState({
         magicWords: false,
-        // focused: false,
         questionPosed: true,
         focused: "false"
-      });
-    }
-
-    if (question === "" || question === null || question === false) {
-      this.setState({
-        // focused: false
       });
     }
   }
@@ -104,69 +102,60 @@ class Fortune extends Component {
     this.setState({ focused });
   }
 
+  handleChange(value, questionPosed) {
+    this.setState({
+      value,
+      eyePosition: value.length,
+      magicWords: false,
+      questionPosed: false
+    });
+  }
+
   render() {
-    const focusedClass = this.props.focused == "true" ? "#2c2122" : "#1a1a1a";
+    const {
+      focused,
+      questionPosed,
+      unlocked,
+      showFortune,
+      fortune,
+      eyePosition
+    } = this.state;
+
     const containerClass =
-      this.state.focused == "true" ? "container-focused" : "container";
+      focused == "true" ? "container-focused" : "container";
+    const magicWordClass = questionPosed == true ? "response" : "empty";
+    const loadingClass = unlocked === true ? "loading" : "default";
 
-    const magicWordClass =
-      this.state.questionPosed == true && this.props.focused != true
-        ? "response"
-        : "empty";
-
-    const loadingClass = this.state.unlocked === true ? "loading" : "default";
-
-    const focusedHeight = {
-      color: "white",
-      position: "absolute",
-      top: "25%",
-      left: "0%",
-      zIndex: 999
-    };
+    if (showFortune) {
+      return <p className="fortune">{fortune}</p>;
+    }
 
     return (
-      <Fragment>
-        {this.state.showFortune ? (
-          <p className="fortune">{this.state.fortune}</p>
-        ) : (
-          <p className="hidden" />
-        )}
-        <div className={loadingClass}>
-          <div className={containerClass}>
-            <Genie
-              setEyes={eyePosition => this.setState({ eyePosition })}
-              focused={this.state.focused}
-              eyePosition={this.state.eyePosition}
+      <div className={loadingClass}>
+        <div className={containerClass}>
+          <Genie
+            setEyes={eyePosition => this.setState({ eyePosition })}
+            focused={focused}
+            eyePosition={eyePosition}
+            {...this.props}
+          />
+          <p className="instructions">
+            Say the magic words to reveal your fortune
+          </p>
+          <div className="fortune-container">
+            <FortuneInput
+              poseQuestion={this.handlePoseQuestion}
+              setFocus={this.handleSetFocus}
+              handleChange={this.handleChange}
               {...this.props}
+              {...this.state}
             />
-            <p className="instructions">
-              Say the magic words to reveal your fortune
-            </p>
-            <div className="fortune-container">
-              <FortuneInput
-                poseQuestion={this.handlePoseQuestion}
-                setEyes={eyePosition => this.setState({ eyePosition })}
-                resetQuestion={() => this.setState({ magicWords: false })}
-                setFocus={this.handleSetFocus}
-                setQuestionPosed={posed =>
-                  this.setState({ questionPosed: posed })
-                }
-                {...this.props}
-                {...this.state}
-              />
-              <p className="hint">Hint: le pain perdu est perdu</p>
-            </div>
-
-            <p className={magicWordClass}>{this.renderResponse()}</p>
+            <p className="hint">Hint: {MAGIC_WORDS}</p>
           </div>
+          <p className={magicWordClass}>{this.renderResponse()}</p>
         </div>
-      </Fragment>
+      </div>
     );
-
-    if (this.state.fortune && this.state.showFortune) {
-      return <p className="fortune">{this.state.fortune}</p>;
-    } else {
-    }
   }
 }
 

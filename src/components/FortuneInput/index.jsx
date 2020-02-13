@@ -8,54 +8,27 @@ class FortuneInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: "",
-      count: 0,
-      height: window.innerHeight,
-      condition: "NULL",
-      cherry: true
+      height: window.innerHeight
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.determineClassName = this.determineClassName.bind(this);
 
-    this.handleFocus = this.handleFocus.bind(this);
-
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.updateDimensions = this.updateDimensions.bind(this);
+
+    this.handleFocus = this.handleFocus.bind(this);
   }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   if (
-  //     nextProps.focused !== this.props.focused ||
-  //     nextState.value !== this.state.value ||
-  //     nextState.count !== this.state.count
-  //   ) {
-  //     return true;
-  //   }
-  //
-  //   return false;
-  // }
-
   componentDidUpdate(prevProps, prevState) {
-    // console.log("update");
+    const { setFocus } = this.props;
     if (this.state.height > prevState.height) {
-      console.log("this.state grew");
-      this.props.setFocus("false");
-
-      this.setState({ condition: "COMPONENT DID UPDATE YO" });
+      setFocus("false");
     } else if (this.state.height < prevState.height) {
-      console.log("this.state shrank");
-      this.props.setFocus("true");
-      this.setState({ condition: "true" });
+      setFocus("true");
     }
-    //else if (this.state.clicked === true) {
-    // this.props.setFocus("true");
-    // this.setState({
-    //   clicked: false
-    // });
-    // }
   }
 
   componentDidMount() {
@@ -75,7 +48,7 @@ class FortuneInput extends Component {
   handleSubmit(e) {
     e.preventDefault();
     document.activeElement.blur();
-    this.props.poseQuestion(this.state.value);
+    this.props.poseQuestion();
   }
 
   handleClickOutside(event) {
@@ -97,28 +70,13 @@ class FortuneInput extends Component {
   }
 
   handleFocus() {
-    console.log("focus class");
-    this.setState({ condition: "handle focus", clicked: true }, () =>
-      this.props.setFocus("true")
-    );
+    this.props.setFocus("true");
   }
 
-  handleChange(e) {
-    const { setEyes } = this.props;
-    const { value } = this.state;
+  handleChange({ target: { value } }) {
+    const { handleChange } = this.props;
 
-    this.setState(
-      {
-        value: e.target.value
-      },
-      () => {
-        this.props.setEyes(this.state.value.length);
-
-        this.props.resetQuestion();
-
-        this.props.setQuestionPosed(false);
-      }
-    );
+    handleChange(value, false);
   }
 
   render() {
@@ -131,8 +89,7 @@ class FortuneInput extends Component {
           type="text"
           className={this.determineClassName()}
           onFocus={this.handleFocus}
-          onBlur={() => this.props.setFocus("false")}
-          value={this.state.value}
+          value={this.props.value}
           maxLength={MAX_CHARACTERS}
           onChange={this.handleChange}
           disabled={this.props.unlocked === true}
