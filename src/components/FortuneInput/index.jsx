@@ -22,14 +22,21 @@ class FortuneInput extends Component {
     this.handleFocus = this.handleFocus.bind(this);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const { setFocus } = this.props;
-    if (this.state.height > prevState.height) {
-      setFocus("false");
-    } else if (this.state.height < prevState.height) {
-      console.log("wayuur");
-      setFocus("true");
+  // componentDidUpdate(prevProps, prevState) {
+  //   const { setFocus } = this.props;
+  //   if (this.state.height > prevState.height) {
+  //     setFocus("false");
+  //   } else if (this.state.height < prevState.height) {
+  //     console.log("wayuur");
+  //     setFocus("true");
+  //   }
+  // }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextState.height !== this.state.height) {
+      return false;
     }
+    return true;
   }
 
   componentDidMount() {
@@ -43,8 +50,25 @@ class FortuneInput extends Component {
   }
 
   updateDimensions() {
+    const { setFocus } = this.props;
     console.log("here");
-    this.setState({ height: window.innerHeight });
+
+    const height = window.innerHeight;
+
+    let focus;
+
+    if (height > this.state.height) {
+      focus = "false";
+    } else if (height < this.state.height) {
+      focus = "true";
+    }
+
+    this.setState(
+      {
+        height
+      },
+      () => setFocus(focus)
+    );
   }
 
   handleSubmit(e) {
@@ -56,7 +80,11 @@ class FortuneInput extends Component {
   handleClickOutside(event) {
     const { setFocus } = this.props;
 
-    if (this.input && !this.input.contains(event.target)) {
+    if (
+      this.input &&
+      !this.input.contains(event.target) &&
+      this.props.focused === true
+    ) {
       this.props.setFocus("false", "ref");
     }
   }
@@ -72,8 +100,11 @@ class FortuneInput extends Component {
   }
 
   handleFocus() {
-    console.log("thisprops", this.props.mobile);
-    this.props.setFocus("true");
+    const { isMobile } = this.props;
+
+    if (!isMobile) {
+      this.props.setFocus("true");
+    }
   }
 
   handleChange({ target: { value } }) {
@@ -83,7 +114,7 @@ class FortuneInput extends Component {
   }
 
   render() {
-    console.log("test");
+    console.log("render");
     return (
       <form onSubmit={this.handleSubmit}>
         <input

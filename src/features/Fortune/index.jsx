@@ -25,7 +25,7 @@ class Fortune extends Component {
       magicWords: false,
       unlocked: false,
       focused: "false",
-      mobile: false
+      isMobile: false
     };
 
     this.handlePoseQuestion = this.handlePoseQuestion.bind(this);
@@ -36,7 +36,7 @@ class Fortune extends Component {
   componentDidMount() {
     const fortuneId = this.props.match.params.fortuneId;
 
-    console.log("window.width", window.innerWidth);
+    const isMobile = window.screen.width < 600;
 
     if (fortuneId) {
       this.props.history.replace("/");
@@ -45,7 +45,8 @@ class Fortune extends Component {
         .then(response => response.json())
         .then(data => {
           this.setState({
-            fortune: data.fortune
+            fortune: data.fortune,
+            isMobile
           });
         })
         .catch(error => {
@@ -59,6 +60,10 @@ class Fortune extends Component {
       //       fortune: data.fortune
       //     });
       //   });
+    } else {
+      this.setState({
+        isMobile
+      });
     }
   }
 
