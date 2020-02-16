@@ -94,7 +94,7 @@ class Fortune extends Component {
 
   renderResponse() {
     if (this.state.magicWords === true) {
-      return "Bien dit mon gars";
+      return "You didn't have to know...";
     }
 
     if (this.state.magicWords === false) {
