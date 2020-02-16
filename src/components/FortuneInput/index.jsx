@@ -51,7 +51,6 @@ class FortuneInput extends Component {
 
   updateDimensions() {
     const { setFocus } = this.props;
-    console.log("here");
 
     const height = window.innerHeight;
 
@@ -83,7 +82,7 @@ class FortuneInput extends Component {
     if (
       this.input &&
       !this.input.contains(event.target) &&
-      this.props.focused === true
+      this.props.focused == "true"
     ) {
       this.props.setFocus("false", "ref");
     }
@@ -114,7 +113,6 @@ class FortuneInput extends Component {
   }
 
   render() {
-    console.log("render");
     return (
       <form onSubmit={this.handleSubmit}>
         <input
