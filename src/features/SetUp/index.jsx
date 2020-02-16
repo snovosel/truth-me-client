@@ -87,7 +87,7 @@ class SetUp extends Component {
 
         {this.state.uri && (
           <p onClick={this.handleCopyClick} className="link">
-            novowd.com/fortune/{this.state.uri}
+            novowd.com/{this.state.uri}
           </p>
         )}
         {this.state.copied ? (

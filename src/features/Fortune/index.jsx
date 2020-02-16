@@ -73,7 +73,8 @@ class Fortune extends Component {
   }
 
   handlePoseQuestion() {
-    if (this.state.value === MAGIC_WORDS) {
+    const lowerCaseVal = this.state.value.toLowerCase();
+    if (lowerCaseVal === MAGIC_WORDS) {
       this.setState({
         magicWords: this.state.fortune ? true : false,
         questionPosed: true,
@@ -82,7 +83,7 @@ class Fortune extends Component {
       });
     }
 
-    if (this.state.value !== MAGIC_WORDS) {
+    if (lowerCaseVal !== MAGIC_WORDS) {
       this.setState({
         magicWords: false,
         questionPosed: true,
