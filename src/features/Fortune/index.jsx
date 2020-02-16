@@ -24,7 +24,8 @@ class Fortune extends Component {
       eyePosition: null,
       magicWords: false,
       unlocked: false,
-      focused: "false"
+      focused: "false",
+      mobile: false
     };
 
     this.handlePoseQuestion = this.handlePoseQuestion.bind(this);
@@ -35,8 +36,10 @@ class Fortune extends Component {
   componentDidMount() {
     const fortuneId = this.props.match.params.fortuneId;
 
+    console.log("window.width", window.innerWidth);
+
     if (fortuneId) {
-      this.props.history.replace("/fortune");
+      this.props.history.replace("/");
 
       fetch("https://psst.novowd.com/fortune/" + fortuneId)
         .then(response => response.json())

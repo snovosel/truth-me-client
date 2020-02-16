@@ -27,6 +27,7 @@ class FortuneInput extends Component {
     if (this.state.height > prevState.height) {
       setFocus("false");
     } else if (this.state.height < prevState.height) {
+      console.log("wayuur");
       setFocus("true");
     }
   }
@@ -42,6 +43,7 @@ class FortuneInput extends Component {
   }
 
   updateDimensions() {
+    console.log("here");
     this.setState({ height: window.innerHeight });
   }
 
@@ -70,6 +72,7 @@ class FortuneInput extends Component {
   }
 
   handleFocus() {
+    console.log("thisprops", this.props.mobile);
     this.props.setFocus("true");
   }
 
@@ -80,6 +83,7 @@ class FortuneInput extends Component {
   }
 
   render() {
+    console.log("test");
     return (
       <form onSubmit={this.handleSubmit}>
         <input
