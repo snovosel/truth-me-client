@@ -7,9 +7,6 @@ const MAX_CHARACTERS = 42;
 class FortuneInput extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      height: window.innerHeight
-    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
@@ -17,57 +14,26 @@ class FortuneInput extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
 
-    this.updateDimensions = this.updateDimensions.bind(this);
-
     this.handleFocus = this.handleFocus.bind(this);
-  }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   const { setFocus } = this.props;
-  //   if (this.state.height > prevState.height) {
-  //     setFocus("false");
-  //   } else if (this.state.height < prevState.height) {
-  //     console.log("wayuur");
-  //     setFocus("true");
-  //   }
-  // }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextState.height !== this.state.height) {
-      return false;
-    }
-    return true;
+    this.handleFocusListener = this.handleFocusListener.bind(this);
   }
 
   componentDidMount() {
     document.addEventListener("mousedown", this.handleClickOutside);
-    window.addEventListener("resize", this.updateDimensions);
+    document.addEventListener("focus", this.handleFocusListener, true);
   }
 
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.handleClickOutside);
-    window.removeEventListener("resize", this.updateDimensions);
+    document.addEventListener("focus", this.handleFocusListener, true);
   }
 
-  updateDimensions() {
-    const { setFocus } = this.props;
+  handleFocusListener() {
+    const { isMobile, setFocus } = this.props;
 
-    const height = window.innerHeight;
-
-    let focus;
-
-    if (height > this.state.height) {
-      focus = "false";
-    } else if (height < this.state.height) {
-      focus = "true";
+    if (isMobile) {
+      setFocus("true");
     }
-
-    this.setState(
-      {
-        height
-      },
-      () => setFocus(focus)
-    );
   }
 
   handleSubmit(e) {
