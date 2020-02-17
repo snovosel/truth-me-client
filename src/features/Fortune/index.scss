@@ -32,7 +32,6 @@
 @mixin container() {
   width: 100%;
   height: 100%;
-  position: relative;
 
   display: flex;
   flex-direction: column;
@@ -42,8 +41,10 @@
   transition: background-color 0.2s linear;
 
   @media only screen and (max-width: 600px) {
+    transition: padding-bottom 0.7s linear;
     justify-content: center;
-    max-height: 100%;
+    padding-bottom: 0;
+    height: 100%;
   }
 }
 
@@ -53,10 +54,16 @@
 
   &-focused {
     @include container();
-    background-color: #2c2122;
+
+    // background-color: #2c2122;
 
     @media only screen and (max-width: 600px) {
-      justify-content: flex-start;
+      justify-content: flex-end;
+      transition: padding-bottom 0.7s linear;
+      padding-bottom: -25px;
+
+      position: absolute;
+      bottom: 10px;
 
       .response {
         bottom: -10%;
@@ -64,6 +71,24 @@
     }
   }
 }
+
+// @keyframes move {
+//   from {
+//     justify-content: center;
+//   }
+//   to {
+//     justify-content: flex-end;
+//   }
+// }
+//
+// @-webkit-keyframes keyarm {
+//   from {
+//     justify-content: center;
+//   }
+//   to {
+//     justify-content: flex-end;
+//   }
+// }
 
 .loader {
   width: 250px;
@@ -87,9 +112,9 @@
   height: 100%;
   width: 100%;
 
-  min-height: 100%;
+  // min-height: 100%;
 
-  position: absolute;
+  // position: absolute;
 }
 
 .loading {
@@ -136,9 +161,9 @@
   }
 }
 
-.container-focused {
-  background-color: #2c2122;
-}
+// .container-focused {
+//   background-color: #2c2122;
+// }
 
 .hidden {
   opacity: 0;

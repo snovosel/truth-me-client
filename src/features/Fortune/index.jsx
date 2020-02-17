@@ -11,9 +11,13 @@ const lamp = require("../../unnamedopaque.png");
 
 const MAGIC_WORDS = "open sesame";
 
+const scrollToTop = () => window.setTimeout(() => window.scrollTo(0, 0), 0);
+
 class Fortune extends Component {
   constructor(props) {
     super(props);
+
+    this.input = null;
 
     this.state = {
       value: "",
@@ -25,12 +29,20 @@ class Fortune extends Component {
       magicWords: false,
       unlocked: false,
       focused: "false",
-      isMobile: false
+      isMobile: false,
+      containerClass: "container"
     };
 
     this.handlePoseQuestion = this.handlePoseQuestion.bind(this);
     this.handleSetFocus = this.handleSetFocus.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+
+    this.setRef = this.setRef.bind(this);
+  }
+
+  setRef(ref) {
+    this.input = ref;
   }
 
   componentDidMount() {
@@ -77,6 +89,17 @@ class Fortune extends Component {
     }
   }
 
+  handleClick(event) {
+    // console.log("this.input", this.input.current);
+    // if (
+    //   this.input &&
+    //   !this.input.contains(event.target) &&
+    //   this.props.focused == "true"
+    // ) {
+    //   this.handleSetFocus("false");
+    // }
+  }
+
   handlePoseQuestion() {
     const lowerCaseVal = this.state.value.toLowerCase();
     if (lowerCaseVal === MAGIC_WORDS) {
@@ -109,6 +132,7 @@ class Fortune extends Component {
 
   handleSetFocus(focused) {
     this.setState({ focused });
+    this.input.scrollIntoView({ behavior: "smooth" });
   }
 
   handleChange(value, questionPosed) {
@@ -141,7 +165,7 @@ class Fortune extends Component {
 
     return (
       <div className={loadingClass}>
-        <div className={containerClass}>
+        <div onClick={this.handleClick} className={containerClass}>
           <Genie
             setEyes={eyePosition => this.setState({ eyePosition })}
             focused={focused}
@@ -156,6 +180,7 @@ class Fortune extends Component {
               poseQuestion={this.handlePoseQuestion}
               setFocus={this.handleSetFocus}
               handleChange={this.handleChange}
+              setRef={this.setRef}
               {...this.props}
               {...this.state}
             />

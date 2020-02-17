@@ -4,18 +4,28 @@ import "./style.scss";
 
 const MAX_CHARACTERS = 42;
 
+const scrollToTop = () => {
+  return window.setTimeout(() => window.scrollTo(0, 0), 0);
+};
+
 class FortuneInput extends Component {
   constructor(props) {
     super(props);
 
+    // this.input = null;
+
     this.handleChange = this.handleChange.bind(this);
-    this.handleClickOutside = this.handleClickOutside.bind(this);
+
     this.determineClassName = this.determineClassName.bind(this);
 
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.handleFocus = this.handleFocus.bind(this);
+    this.preventDefault = this.preventDefault.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
     this.handleFocusListener = this.handleFocusListener.bind(this);
+
+    // this.scrollToTop = this.scrollToTop.bind(this);
   }
 
   componentDidMount() {
@@ -28,31 +38,10 @@ class FortuneInput extends Component {
     document.addEventListener("focus", this.handleFocusListener, true);
   }
 
-  handleFocusListener() {
-    const { isMobile, setFocus } = this.props;
-
-    if (isMobile) {
-      setFocus("true");
-      window.scrollTo(0, 0);
-    }
-  }
-
   handleSubmit(e) {
     e.preventDefault();
     document.activeElement.blur();
     this.props.poseQuestion();
-  }
-
-  handleClickOutside(event) {
-    const { setFocus } = this.props;
-
-    if (
-      this.input &&
-      !this.input.contains(event.target) &&
-      this.props.focused == "true"
-    ) {
-      this.props.setFocus("false", "ref");
-    }
   }
 
   determineClassName() {
@@ -65,12 +54,24 @@ class FortuneInput extends Component {
     }
   }
 
-  handleFocus() {
+  handleFocus(e) {
     const { isMobile } = this.props;
 
     if (!isMobile) {
       this.props.setFocus("true");
     }
+
+    if (isMobile) {
+      this.props.setFocus("true");
+    }
+  }
+
+  handleBlur() {
+    this.props.setFocus("false");
+  }
+
+  preventDefault(e) {
+    e.preventDefault();
   }
 
   handleChange({ target: { value } }) {
@@ -80,12 +81,29 @@ class FortuneInput extends Component {
   }
 
   render() {
+    // return (
+    //   <form onSubmit={this.handleSubmit}>
+    //     <input
+    //       ref={ref => {
+    //         this.input = ref;
+    //       }}
+    //       onBlur={this.handleBlur}
+    //       type="text"
+    //       className={this.determineClassName()}
+    //       onFocus={this.handleFocus}
+    //       value={this.props.value}
+    //       maxLength={MAX_CHARACTERS}
+    //       onChange={this.handleChange}
+    //       disabled={this.props.unlocked === true}
+    //     />
+    //   </form>
+    // );
+
     return (
       <form onSubmit={this.handleSubmit}>
         <input
-          ref={ref => {
-            this.input = ref;
-          }}
+          ref={this.props.setRef}
+          onBlur={this.handleBlur}
           type="text"
           className={this.determineClassName()}
           onFocus={this.handleFocus}
@@ -96,6 +114,20 @@ class FortuneInput extends Component {
         />
       </form>
     );
+  }
+
+  handleFocusListener(event) {
+    const { isMobile, setFocus, ref } = this.props;
+
+    if (isMobile) {
+      // event.preventDefault();
+      // event.stopPropagation();
+      // window.scrollTo(0, 0);
+      // setTimeout(() => , 0);
+      // this.input.current.scrollIntoView({ behavior: "smooth" });
+
+      scrollToTop();
+    }
   }
 }
 
