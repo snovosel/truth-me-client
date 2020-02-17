@@ -54,11 +54,11 @@ class SetUp extends Component {
   handleCopyClick(e) {
     if (window && window.navigator && window.navigator.clipboard) {
       window.navigator.clipboard.writeText(`www.geniemc.com/${this.state.uri}`);
-    }
 
-    this.setState({
-      copied: true
-    });
+      this.setState({
+        copied: true
+      });
+    }
   }
 
   render() {
