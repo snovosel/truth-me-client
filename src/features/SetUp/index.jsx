@@ -53,7 +53,7 @@ class SetUp extends Component {
 
   handleCopyClick(e) {
     if (window && window.navigator && window.navigator.clipboard) {
-      window.navigator.clipboard.writeText(`demo.novowd.com/${this.state.uri}`);
+      window.navigator.clipboard.writeText(`www.geniemc.com/${this.state.uri}`);
     }
 
     this.setState({
@@ -89,7 +89,7 @@ class SetUp extends Component {
 
         {this.state.uri && (
           <p onClick={this.handleCopyClick} className="link">
-            novowd.com/{this.state.uri}
+            www.geniemc.com/{this.state.uri}
           </p>
         )}
         {this.state.copied ? (
