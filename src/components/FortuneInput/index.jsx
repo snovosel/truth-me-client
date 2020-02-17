@@ -69,6 +69,7 @@ class FortuneInput extends Component {
 
     if (!isMobile) {
       this.props.setFocus("true");
+      window.scrollTo(0, 0);
     }
   }
 
