@@ -33,6 +33,7 @@ class FortuneInput extends Component {
 
     if (isMobile) {
       setFocus("true");
+      window.scrollTo(0, 0);
     }
   }
 
@@ -69,7 +70,6 @@ class FortuneInput extends Component {
 
     if (!isMobile) {
       this.props.setFocus("true");
-      window.scrollTo(0, 0);
     }
   }
 
